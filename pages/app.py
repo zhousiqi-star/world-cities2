@@ -6,13 +6,6 @@ plt.style.use('seaborn-v0_8')
 st.title('World Cities')
 df = pd.read_csv('worldcities.csv')
 
-# st.map only recognises lat/lon columns, while the dataset ships a 'lng' column
-df = df.rename(columns={'lng': 'lon'})
-
-# the raw dataset stores absolute population counts; the slider works in millions
-if df['population'].max() > 1000:
-    df['population'] = df['population'] / 1_000_000
-
 # note that you have to use 0.0 and 40.0 given that the data type of population is float
 population_filter = st.slider('Minimal Population (Millions):', 0.0, 40.0, 3.6)  # min, max, default
 
